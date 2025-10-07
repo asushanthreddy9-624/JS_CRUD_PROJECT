@@ -1,25 +1,259 @@
 body {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 .card {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .student-card {
-    transition: transform 0.2s;
+  transition: transform 0.2s;
 }
 
 .student-card:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .percentage-badge {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 /* Toastr customization */
 .toast {
-    opacity: 1;
+  opacity: 1;
+}
+
+/* Marks and Attendance Cards */
+.marks-card,
+.attendance-card {
+  border-left: 4px solid #007bff;
+}
+
+.marks-card.high-score {
+  border-left-color: #28a745;
+}
+
+.marks-card.medium-score {
+  border-left-color: #ffc107;
+}
+
+.marks-card.low-score {
+  border-left-color: #dc3545;
+}
+
+.attendance-card.high-attendance {
+  border-left-color: #28a745;
+}
+
+.attendance-card.medium-attendance {
+  border-left-color: #ffc107;
+}
+
+.attendance-card.low-attendance {
+  border-left-color: #dc3545;
+}
+
+.percentage-display {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Progress bars */
+.progress {
+  height: 8px;
+}
+
+/* Badge styles */
+.badge {
+  font-size: 0.75rem;
+}
+
+/* Summary cards */
+.summary-card {
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Status indicators */
+.status-excellent {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.status-good {
+  color: #17a2b8;
+  font-weight: bold;
+}
+
+.status-warning {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.status-danger {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+}
+/* Sync status indicator */
+#syncIndicator {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* API Configuration Section */
+.api-config {
+    background: #f8f9fa;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.api-config h6 {
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+/* Import/Export buttons */
+.btn-group-vertical .btn {
+    margin-bottom: 0.5rem;
+}
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 5px;
+    }
+    
+    .card-body {
+        padding: 0.75rem;
+    }
+    
+    .btn-sm {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+    }
+    
+    .student-card .card-footer {
+        padding: 0.5rem;
+    }
+    
+    .student-card .card-footer .btn {
+        margin-bottom: 0.25rem;
+    }
+    
+    /* Stack buttons vertically on mobile */
+    .student-card .card-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .student-card .card-footer .btn {
+        width: 100%;
+        margin: 0.1rem 0;
+    }
+    
+    /* Improve modal responsiveness */
+    .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    /* Better table-like layouts for marks/attendance */
+    .marks-card .row,
+    .attendance-card .row {
+        margin: 0 -5px;
+    }
+    
+    .marks-card .col-md-4,
+    .attendance-card .col-md-4,
+    .marks-card .col-md-3,
+    .attendance-card .col-md-3,
+    .marks-card .col-md-2,
+    .attendance-card .col-md-2 {
+        padding: 0 5px;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .api-config,
+    .btn,
+    .card-footer {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .student-card {
+        break-inside: avoid;
+    }
+}
+
+/* Accessibility Improvements */
+.btn:focus,
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+    .card {
+        border: 2px solid #000;
+    }
+    
+    .text-muted {
+        color: #000 !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .student-card,
+    .summary-card {
+        transition: none;
+    }
+}
+
+/* Performance monitoring indicator */
+.performance-indicator {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    z-index: 1000;
+    opacity: 0.9;
 }
