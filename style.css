@@ -1,0 +1,25 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.student-card {
+    transition: transform 0.2s;
+}
+
+.student-card:hover {
+    transform: translateY(-2px);
+}
+
+.percentage-badge {
+    font-size: 0.8rem;
+}
+
+/* Toastr customization */
+.toast {
+    opacity: 1;
+}
