@@ -1,90 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Records Management System</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Toastr CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Records Management System</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Toastr CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">Student Records System</a>
-        </div>
-    </nav>
-
-    <!-- Main Container -->
-    <div class="container mt-4">
-        <!-- Student Management Section -->
-        <div class="row">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">Student Records System</a>
+    </div>
+  </nav>
+  <!-- Enhanced API Configuration Section -->
+  <!-- <div class="container mt-3">
+    <div class="row">
+      <div class="col-12">
+        <div class="api-config">
+          <h6>📊 System Configuration & Tools</h6>
+          <div class="alert alert-info">
+            <small>
+              <strong>JSONBin Setup:</strong> Get your API key from
+              <a href="https://jsonbin.io/" target="_blank">JSONBin.io</a> and replace the placeholder in script.js
+            </small>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <button class="btn btn-outline-primary btn-sm w-100" onclick="studentManager.exportData()">
+                📥 Export Data Backup
+              </button>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label class="btn btn-outline-success btn-sm w-100">
+                📤 Import Data Backup
+                <input type="file" accept=".json" style="display: none;" onchange="studentManager.importData(event)">
+              </label>
+            </div>
+          </div>
+          <div class="row mt-2">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Student Management</h5>
-                        <button class="btn btn-success btn-sm" id="addStudentBtn">
-                            Add New Student
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <!-- Student List will be displayed here -->
-                        <div id="studentList" class="row">
-                            <!-- Student cards will be dynamically inserted here -->
-                        </div>
-                    </div>
-                </div>
+              <small class="text-muted">
+                <strong>Quick Tip:</strong> Double-click any student card to quickly open details
+              </small>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div> -->
 
-    <!-- Student Modal (for Add/Edit) -->
-    <div class="modal fade" id="studentModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Add Student</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="studentForm">
-                        <input type="hidden" id="studentId">
-                        <div class="mb-3">
-                            <label for="studentName" class="form-label">Student Name</label>
-                            <input type="text" class="form-control" id="studentName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="studentEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="studentEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="studentPhone" class="form-label">Phone</label>
-                            <input type="tel" class="form-control" id="studentPhone" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="saveStudentBtn">Save Student</button>
-                </div>
+  <!-- Main Container -->
+  <div class="container mt-4">
+    <!-- Student Management Section -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Student Management</h5>
+            <button class="btn btn-success btn-sm" id="addStudentBtn">
+              Add New Student
+            </button>
+          </div>
+          <div class="card-body">
+            <!-- Student List will be displayed here -->
+            <div id="studentList" class="row">
+              <!-- Student cards will be dynamically inserted here -->
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- JavaScript Dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+  <!-- Student Modal (for Add/Edit) -->
+  <div class="modal fade" id="studentModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">Add Student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="studentForm">
+            <input type="hidden" id="studentId">
+            <div class="mb-3">
+              <label for="studentName" class="form-label">Student Name</label>
+              <input type="text" class="form-control" id="studentName" required>
+            </div>
+            <div class="mb-3">
+              <label for="studentEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="studentEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="studentPhone" class="form-label">Phone</label>
+              <input type="tel" class="form-control" id="studentPhone" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveStudentBtn">Save Student</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student Details Modal (for Marks & Attendance) -->
+  <div class="modal fade" id="studentDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="studentDetailsTitle">Student Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Student Info -->
+          <div class="row mb-4">
+            <div class="col-md-4">
+              <strong>Name:</strong> <span id="detailStudentName">-</span>
+            </div>
+            <div class="col-md-4">
+              <strong>Email:</strong> <span id="detailStudentEmail">-</span>
+            </div>
+            <div class="col-md-4">
+              <strong>Phone:</strong> <span id="detailStudentPhone">-</span>
+            </div>
+          </div>
+
+          <!-- Marks Management -->
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">Marks Management</h6>
+              <button class="btn btn-success btn-sm" id="addMarkBtn">
+                Add Marks
+              </button>
+            </div>
+            <div class="card-body">
+              <div id="marksList">
+                <!-- Marks will be displayed here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Attendance Management -->
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">Attendance Management</h6>
+              <button class="btn btn-success btn-sm" id="addAttendanceBtn">
+                Add Attendance
+              </button>
+            </div>
+            <div class="card-body">
+              <div id="attendanceList">
+                <!-- Attendance records will be displayed here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marks Modal -->
+  <div class="modal fade" id="markModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="markModalTitle">Add Marks</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="markForm">
+            <input type="hidden" id="markId">
+            <div class="mb-3">
+              <label for="courseName" class="form-label">Course</label>
+              <input type="text" class="form-control" id="courseName" required>
+            </div>
+            <div class="mb-3">
+              <label for="moduleName" class="form-label">Module</label>
+              <input type="text" class="form-control" id="moduleName" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="totalMarks" class="form-label">Total Marks</label>
+                <input type="number" class="form-control" id="totalMarks" min="1" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="securedMarks" class="form-label">Secured Marks</label>
+                <input type="number" class="form-control" id="securedMarks" min="0" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="marksPercentage" class="form-label">Percentage</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="marksPercentage" readonly>
+                <span class="input-group-text">%</span>
+              </div>
+              <div class="form-text">Percentage is calculated automatically</div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveMarkBtn">Save Marks</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attendance Modal -->
+  <div class="modal fade" id="attendanceModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="attendanceModalTitle">Add Attendance</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="attendanceForm">
+            <input type="hidden" id="attendanceId">
+            <div class="mb-3">
+              <label for="attendanceCourse" class="form-label">Course</label>
+              <input type="text" class="form-control" id="attendanceCourse" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="totalClasses" class="form-label">Total Classes</label>
+                <input type="number" class="form-control" id="totalClasses" min="1" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="classesAttended" class="form-label">Classes Attended</label>
+                <input type="number" class="form-control" id="classesAttended" min="0" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="attendancePercentage" class="form-label">Attendance Percentage</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="attendancePercentage" readonly>
+                <span class="input-group-text">%</span>
+              </div>
+              <div class="form-text">Percentage is calculated automatically</div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveAttendanceBtn">Save Attendance</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
 </body>
+
 </html>
